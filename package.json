@@ -1,0 +1,31 @@
+{
+  "name": "drawsheep.me",
+  "version": "0.1.0",
+  "description": "Mix entre un pictionnary, un téléphone déformant et un skribbl.io",
+  "author": "anmavtb <vincent.guiraudou@gmail.com> (https://vincentguiraudou.github.io/CV)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "ent": "^2.2.0",
+    "rid": "^0.0.1",
+    "cookie": "^0.4.1",
+    "cookie-session": "^1.4.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "draw",
+    "sheep",
+    "game"
+  ]
+}
