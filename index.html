@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DrawSheep.me</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="anmavtb" />
+    <meta name="description" content="Draw some sheeps with your friends" />
+    <meta name="keywords" content="draw,sheep,game" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" href="https://cdn.glitch.com/bd926bf4-0301-4c1a-9ca4-dbd1f1baa4ae%2Fsheep.png?v=1590333497791" />
+
+    <style>
+      * {
+        margin: 0;
+      }
+
+      #can {
+        position: fixed;
+        top: 10%;
+        left: 10%;
+        border: 2px solid black;
+      }
+
+      #cursor {
+        width: 10px;
+        height: 10px;
+        background-color: none;
+        position: absolute;
+        border: none;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      #toolBox {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      #colorContainer {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .colorButtonRow {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .colorButton {
+        width: 25px;
+        height: 25px;
+        border: 0;
+        cursor: pointer;
+      }
+
+      #colorChoose {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        padding: 0;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      #brushSize {
+        border: 1px solid black;
+      }
+
+      .buttonBox {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+
+      #eraser {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        margin-left: 10px;
+      }
+
+      #clear {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        margin-left: 10px;
+      }
+
+      #fillAll {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        margin-left: 10px;
+      }
+
+      #canSave {
+        position: fixed;
+        top: 10%;
+        left: 45%;
+        border: 2px solid black;
+      }
+
+      #zone_chat strong {
+        color: white;
+        background-color: black;
+      }
+
+      #zone_chat {
+        height: 526px;
+        /* (hText + padding) * nbrLignes + padding */
+        width: 350px;
+        border: 1px solid black;
+        overflow: hidden;
+        overflow-y: scroll;
+      }
+
+      #mettreADroite {
+        float: right;
+      }
+
+      footer {
+        clear: both;
+        position: relative;
+        height: 200px;
+        margin-bottom: 0%;
+      }
+    </style>
+  </head>
+
+  <body onload="init()">
+    <canvas id="can" width="500" height="500"></canvas>
+    <div id="cursor"></div>
+    <div id="toolBox">
+      <input
+        id="colorChoose"
+        type="color"
+        onchange="color(this)"
+        value="#000000"
+        title="Selected color"
+      />
+      <div id="colorContainer">
+        <div class="colorButtonRow">
+          <button
+            class="colorButton"
+            style="background: #ffffff;"
+            id="#ffffff"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #c1c1c1;"
+            id="#c1c1c1"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #ef130b;"
+            id="#ef130b"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #ff7100;"
+            id="#ff7100"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #ffe400;"
+            id="#ffe400"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #00cc00;"
+            id="#00cc00"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #00b2ff;"
+            id="#00b2ff"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #231fd3;"
+            id="#231fd3"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #a300ba;"
+            id="#a300ba"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #d37caa;"
+            id="#d37caa"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #a0522d;"
+            id="#a0522d"
+            onclick="color(this)"
+          ></button>
+        </div>
+        <div class="colorButtonRow">
+          <button
+            class="colorButton"
+            style="background: #000000;"
+            id="#000000"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #4c4c4c;"
+            id="#4c4c4c"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #740b07;"
+            id="#740b07"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #c23800;"
+            id="#c23800"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #e8a200;"
+            id="#e8a200"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #005510;"
+            id="#005510"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #00569e;"
+            id="#00569e"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #0e0865;"
+            id="#0e0865"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #550069;"
+            id="#550069"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #a75574;"
+            id="#a75574"
+            onclick="color(this)"
+          ></button>
+          <button
+            class="colorButton"
+            style="background: #63300d;"
+            id="#63300d"
+            onclick="color(this)"
+          ></button>
+        </div>
+      </div>
+      <input
+        type="range"
+        id="sizeChoose"
+        min="5"
+        max="25"
+        step="5"
+        value="5"
+        onchange="changeSize(this)"
+      />
+      <canvas id="brushSize" width="50" height="50"></canvas>
+      <button
+        class="buttonBox"
+        id="eraser"
+        style="background: white;"
+        onclick="color(this)"
+        title="Eraser"
+      >
+        G
+      </button>
+      <button
+        class="buttonBox"
+        id="clear"
+        style="background: white;"
+        onclick="clearDraw()"
+        title="Clear All"
+      >
+        C
+      </button>
+      <button
+        class="buttonBox"
+        id="fill"
+        style="background: white;"
+        onclick="fillAll()"
+        title="Fill All"
+      >
+        F
+      </button>
+    </div>
+    <canvas id="canSave" width="500" height="500"></canvas>
+    <input
+      type="button"
+      value="save"
+      id="saveButton"
+      size="30"
+      onclick="saveImage()"
+      style="position:absolute;top:65%;left:10%;"
+      title="Save Image"
+    />
+
+    <div id="mettreADroite">
+      <form action="/" method="POST" id="form_pseudo">
+        <input
+          type="text"
+          name="pseudo"
+          id="pseudo"
+          placeholder="Votre pseudo"
+          maxlength="10"
+          required
+        />
+        <input type="submit" id="envoi-pseudo" value="send" />
+      </form>
+
+      <section id="zone_chat"></section>
+      <form action="/" method="POST" id="formulaire_chat">
+        <input
+          type="text"
+          name="message"
+          id="message"
+          placeholder="Votre message..."
+          size="30"
+          autofocus
+        />
+        <input type="submit" id="envoi_message" value="Envoyer" />
+      </form>
+    </div>
+
+    <footer>
+      <p>
+        The owner of this site is not responsible for any user generated content
+        (drawings, messages, usernames)
+      </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      // Connexion à socket.io
+      var socket = io.connect("http://localhost:8080");
+
+      var pseudo;
+
+      $("#form_pseudo").submit(function() {
+        pseudo = $("#pseudo").val(); // Lit le pseudo dans le formulaire
+        socket.emit("nouveau_client", pseudo); // Envoie le pseudo au serveur
+        document.title = pseudo + " - " + document.title; // Affiche le pseudo dans le titre
+        return false;
+      });
+
+      // Quand on reçoit un message, on l'insère dans la page
+      socket.on("message", function(data) {
+        insereMessage(data.pseudo, data.message);
+      });
+
+      // Quand un nouveau client se connecte, on affiche l'information
+      socket.on("nouveau_client", function(pseudo) {
+        $("#zone_chat").append(
+          "<p><em>" + pseudo + " a rejoint le Chat !</em></p>"
+        );
+      });
+
+      // Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
+      $("#formulaire_chat").submit(function() {
+        var message = $("#message").val(); // Récupère le message
+        socket.emit("message", message); // Transmet le message aux autres
+        insereMessage(pseudo, message); // Affiche le message aussi sur notre page
+        $("#message")
+          .val("")
+          .focus(); // Vide la zone de Chat et remet le focus dessus
+        return false; // Permet de bloquer l'envoi "classique" du formulaire
+      });
+
+      // Ajoute un message dans la page
+      function insereMessage(pseudo, message) {
+        $("#zone_chat").append(
+          "<p><strong>" + pseudo + "</strong> " + message + "</p>"
+        );
+        var scrollBar = document.querySelector("#zone_chat");
+        var testHeight = scrollBar.scrollTop + scrollBar.clientHeight + 36;
+
+        console.log("scrollTop = " + scrollBar.scrollTop);
+        console.log("clientHeight = " + scrollBar.clientHeight);
+        console.log("scrolltop + clientheight + 36 = " + testHeight);
+        console.log("scrollHeight = " + scrollBar.scrollHeight);
+
+        // Fait défiler la barre de scroll en bas sauf si on est déjà en bas de la conversation
+        if (testHeight === scrollBar.scrollHeight) {
+          scrollBar.scrollTop = scrollBar.scrollHeight - scrollBar.clientHeight;
+        }
+      }
+
+      var canvas,
+        ctx,
+        canSave,
+        ctxsave,
+        canSize,
+        ctxsize,
+        flag,
+        currX,
+        currY,
+        prevX,
+        prevY,
+        w,
+        h,
+        brushSize = 5,
+        brushColor = "black",
+        isLight = false,
+        words = new Array(),
+        draws = new Array(),
+        i = 0,
+        finish = 0;
+
+      canSize = document.getElementById("brushSize");
+      ctxsize = canSize.getContext("2d");
+      ctxsize.beginPath();
+      ctxsize.arc(25, 25, brushSize, 0, 2 * Math.PI);
+      ctxsize.fill();
+
+      // Initialisation
+      function init() {
+        canvas = document.getElementById("can");
+        ctx = canvas.getContext("2d");
+        w = canvas.width;
+        h = canvas.height;
+
+        canvas.addEventListener(
+          "mousemove",
+          function(e) {
+            findxy("move", e);
+          },
+          false
+        );
+        canvas.addEventListener(
+          "mousedown",
+          function(e) {
+            findxy("down", e);
+          },
+          false
+        );
+        canvas.addEventListener(
+          "mouseup",
+          function(e) {
+            findxy("up", e);
+          },
+          false
+        );
+        canvas.addEventListener(
+          "mouseout",
+          function(e) {
+            findxy("out", e);
+          },
+          false
+        );
+      }
+
+      // Obtention de la position du curseur
+      function findxy(res, e) {
+        // Quand le clic est pressé
+        if (res == "down") {
+          prevX = currX;
+          prevY = currY;
+          currX = e.clientX - canvas.offsetLeft;
+          currY = e.clientY - canvas.offsetTop;
+          flag = true;
+        }
+        // Quand on ne clique plus
+        if (res == "up" || res == "out") {
+          flag = false;
+        }
+        // Quand la souris bouge
+        if (res == "move") {
+          prevX = currX;
+          prevY = currY;
+          currX = e.clientX - canvas.offsetLeft;
+          currY = e.clientY - canvas.offsetTop;
+          if (flag) {
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+            draw();
+          }
+        }
+      }
+
+      // Permet de prévisualiser ce qu'on va dessiner
+      can.addEventListener("mousemove", e => {
+        cursor.style.background = brushColor;
+        cursor.style.height = 2 * brushSize + "px";
+        cursor.style.width = 2 * brushSize + "px";
+        cursor.style.marginTop = -brushSize + "px";
+        cursor.style.marginLeft = -brushSize + "px";
+        // Vérifie la clarté de la couleur pour choisir la bordure adéquate
+        if (isLight) {
+          cursor.style.border = "1px solid black";
+        } else {
+          cursor.style.border = "1px solid white";
+        }
+        cursor.style.top = e.pageY + "px";
+        cursor.style.left = e.pageX + "px";
+      });
+
+      // Empèche la prévisualisation hors du cadre
+      can.addEventListener("mouseout", e => {
+        cursor.style.background = "none";
+        cursor.style.border = "none";
+      });
+
+      // Fonction de dessin
+      function draw() {
+        ctx.beginPath();
+        ctx.fillStyle = brushColor;
+        ctx.lineWidth = brushSize;
+        ctx.arc(currX, currY, brushSize, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+
+      // Efface tout le dessin
+      function clearDraw() {
+        console.log("Drawing cleared");
+        ctx.clearRect(0, 0, w, h);
+      }
+
+      // Sauvegarde l'image en cours
+      function saveImage() {
+        canSave = document.getElementById("canSave");
+        ctxsave = canSave.getContext("2d");
+        var dataImage = ctx.getImageData(0, 0, w, h); // Récupère l'image sous forme de tableau
+        console.log("dessin n° " + i);
+        console.log(dataImage);
+        draws.push(dataImage); // Injecte l'image dans un tableau de tous les dessins
+        console.log(draws);
+        console.log("Image Saved");
+        ctxsave.putImageData(draws[i], 0, 0); // Affiche le dessin sauvegardé dans l'autre canvas
+        i++;
+        finish++;
+        // document.getElementById("saveButton").disabled = true;
+      }
+
+      // Selection de couleur
+      function color(obj) {
+        if (obj.value == "") {
+          if (obj.id == "eraser") {
+            brushColor = "#ffffff";
+            isLight = true;
+            console.log("eraser choosed");
+          } else {
+            brushColor = obj.id;
+            console.log("color choosed : " + brushColor);
+            colorChoose.value = brushColor;
+          }
+        } else {
+          brushColor = obj.value;
+          console.log("color choosed : " + brushColor);
+        }
+        lightOrDark(brushColor);
+      }
+
+      // Changement de la taille du pinceau
+      function changeSize(obj) {
+        console.log("size: " + obj.value);
+        brushSize = obj.value;
+        ctxsize.clearRect(0, 0, w, h);
+        ctxsize.beginPath();
+        ctxsize.arc(25, 25, brushSize, 0, 2 * Math.PI);
+        ctxsize.fill();
+      }
+
+      //Vérifie si la couleur choisie est sombre ou claire
+      function lightOrDark(color) {
+        // Coversion HEX vers RGB : http://gist.github.com/983661
+        color = +(
+          "0x" + color.slice(1).replace(color.length < 5 && /./g, "$&$&")
+        );
+        r = color >> 16;
+        g = (color >> 8) & 255;
+        b = color & 255;
+        // Equation HSP (Highly Sensitive Poo) : http://alienryderflex.com/hsp.html
+        hsp = Math.sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+        // Vérification de la clarté de la couleur
+        if (hsp > 127.5) {
+          console.log("light");
+          isLight = true;
+        } else {
+          console.log("dark");
+          isLight = false;
+        }
+      }
+
+      // Remplissage du cadre
+      function fillAll() {
+        console.log(brushColor);
+        ctx.fillStyle = brushColor;
+        ctx.fillRect(0, 0, 1000, 1000);
+      }
+    </script>
+  </body>
+</html>
