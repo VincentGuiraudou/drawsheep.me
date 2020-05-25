@@ -8,7 +8,11 @@
     <meta name="keywords" content="draw,sheep,game" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="icon" type="image/png" href="https://cdn.glitch.com/bd926bf4-0301-4c1a-9ca4-dbd1f1baa4ae%2Fsheep.png?v=1590333497791" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.glitch.com/bd926bf4-0301-4c1a-9ca4-dbd1f1baa4ae%2Fsheep.png?v=1590333497791"
+    />
 
     <style>
       * {
@@ -450,6 +454,15 @@
       ctxsize.arc(25, 25, brushSize, 0, 2 * Math.PI);
       ctxsize.fill();
 
+      function object(ask, asker, draw, drawer, guess, guesser) {
+        this.ask = ask; // Mot demandé
+        this.asker = asker; // Celui qui a demandé
+        this.draw = draw; // Dessin fait
+        this.drawer = drawer; // Celui qui a dessiné
+        this.guess = guess; // Mot trouvé
+        this.guesser = guesser; // Celui qui a trouvé
+      }
+
       // Initialisation
       function init() {
         canvas = document.getElementById("can");
@@ -562,13 +575,16 @@
         var dataImage = ctx.getImageData(0, 0, w, h); // Récupère l'image sous forme de tableau
         console.log("dessin n° " + i);
         console.log(dataImage);
-        draws.push(dataImage); // Injecte l'image dans un tableau de tous les dessins
+        let image+i new object();
+        image.draw = dataImage;
+        image.drawer = socket.pseudo;
+        draws.push(image); // Injecte l'objet image dans un tableau de tous les dessins
         console.log(draws);
         console.log("Image Saved");
-        ctxsave.putImageData(draws[i], 0, 0); // Affiche le dessin sauvegardé dans l'autre canvas
+        ctxsave.putImageData(draws[i].image["draw"], 0, 0); // Affiche le dessin sauvegardé dans l'autre canvas
         i++;
         finish++;
-        // document.getElementById("saveButton").disabled = true;
+        document.getElementById("saveButton").disabled = true;
       }
 
       // Selection de couleur
