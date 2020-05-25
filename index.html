@@ -580,8 +580,9 @@
         image.drawer = socket.pseudo;
         draws.push(image); // Injecte l'objet image dans un tableau de tous les dessins
         console.log(draws);
+        console.log(draws[i].image.draw);
         console.log("Image Saved");
-        ctxsave.putImageData(draws[i].image["draw"], 0, 0); // Affiche le dessin sauvegardé dans l'autre canvas
+        ctxsave.putImageData(draws[i].image.draw, 0, 0); // Affiche le dessin sauvegardé dans l'autre canvas
         i++;
         finish++;
         document.getElementById("saveButton").disabled = true;
