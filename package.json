@@ -1,6 +1,6 @@
 {
   "name": "drawsheep.me",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Mix entre un pictionnary, un téléphone déformant et un skribbl.io",
   "author": "anmavtb <vincent.guiraudou@gmail.com> (https://vincentguiraudou.github.io/CV)",
   "main": "server.js",
