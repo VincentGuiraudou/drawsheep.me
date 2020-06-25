@@ -382,7 +382,7 @@
 
       $("#form_pseudo").submit(function() {
         pseudo = $("#pseudo").val(); // Lit le pseudo dans le formulaire
-        socket.emit("nouveau_client", pseudo); // Envoie le pseudo au serveur
+        socket.emit("newPlayer", pseudo); // Envoie le pseudo au serveur
         document.title = pseudo + " - " + document.title; // Affiche le pseudo dans le titre
         return false;
       });
@@ -400,7 +400,7 @@
       });
 
       // Quand un nouveau client se connecte, on affiche l'information
-      socket.on("nouveau_client", function(pseudo) {
+      socket.on("newPlayer", function(pseudo) {
         $("#zone_chat").append(
           "<p><em>" + pseudo + " a rejoint le Chat !</em></p>"
         );
