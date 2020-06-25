@@ -377,13 +377,21 @@
       // Connexion à socket.io
       var socket = io.connect("http://localhost:8080");
 
-      var pseudo;
+      var pseudo,
+        nbrPlayers = 0;
 
       $("#form_pseudo").submit(function() {
         pseudo = $("#pseudo").val(); // Lit le pseudo dans le formulaire
         socket.emit("nouveau_client", pseudo); // Envoie le pseudo au serveur
         document.title = pseudo + " - " + document.title; // Affiche le pseudo dans le titre
         return false;
+      });
+
+      // Affiche le nombre de joueurs en ligne
+      socket.on("connection", function(data) {
+        nbrPlayers = data; // Stocke le nombre de joueurs en local
+        console.log(nbrPlayers); // Affiche le nombre de joueurs dans la console
+        socket.emit("connection", nbrPlayers); // Partage le nombre aux autres utilisateurs
       });
 
       // Quand on reçoit un message, on l'insère dans la page
