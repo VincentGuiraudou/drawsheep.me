@@ -3,27 +3,32 @@
 Jeu de dessin sur un principe entre le _Pictionnary_, le _Téléphone déformant_ et _skribbl.io_
 
 [Trello](https://trello.com/b/E6KokbEG/drawsheepme)
-  
+
 [Glitch](https://glitch.com/edit/#!/drawsheep)
 
 ## Déroulement d'une partie
 
 ### Initialisation
 
-3 joueurs minimum
+1. L'hôte choisit son pseudo et crée la partie
+2. Les joueurs choisissent leur pseudo et rejoignent la partie
+3. Quand il y'a **au moins 3 joueurs**, l'hôte peut lancer la partie
 
-### Déroulement du jeu
+### Début de partie
 
-- Joueur N écrit un mot
-- Joueur N+1 dessine le mot écrit par joueur N
-- Joueur N+2 devine le mot dessiné par Joueur N+1
-- Ect. Jusqu'a que Joueur N+x = Joueur N
+1. Mélange des joueurs
+2. Choisir un mot
+3. Appuyer sur "Envoyer"
+4. Attendre que tout le monde ait appuyé
+5. Récupérer le mot du joueur précédent
+6. Dessiner ce mot
+7. Appuyer sur "Envoyer"
+8. Attendre que tout le monde ait appuyé
+9. Récupérer le dessin du joueur précédent
+10. Ecrire le mot qui a été dessiné
+11. Appuyer sur "Envoyer"
+12. Attendre que tout le monde ait appuyé
+13. Recommencer à partir du point 4 jusqu'a qu'on retombe sur son mot
+14. Affichage pour tout le monde de chaque mot avec le dessin qui a été fait et ce qui a été trouvé avec le nom des joueurs dans l'ordre
 
-### Fin du jeu
-
-- Affichage de tous les dessins avec :
-  - le mot demandé
-  - la personne qui a demandé
-  - le dessin fait
-  - le mot trouvé
-  - la personne qui a trouvé
+### Fin de Partie
