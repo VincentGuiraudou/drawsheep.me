@@ -2,6 +2,10 @@
 
 Jeu de dessin sur un principe entre le _Pictionnary_, le _Téléphone déformant_ et _skribbl.io_
 
+[Trello](https://trello.com/b/E6KokbEG/drawsheepme)
+  
+[Glitch](https://glitch.com/edit/#!/drawsheep)
+
 ## Déroulement d'une partie
 
 ### Initialisation
@@ -23,26 +27,3 @@ Jeu de dessin sur un principe entre le _Pictionnary_, le _Téléphone déformant
   - le dessin fait
   - le mot trouvé
   - la personne qui a trouvé
-
-## Tâches à faire
-
-- [x] :sheep: Dessine moi un mouton
-- [ ] Front-End
-  - [x] Maquette
-  - [ ] Graphismes
-    - [ ] Logo et Titre
-    - [ ] Police
-    - [ ] Code couleur
-    - [ ] Icones
-- [ ] BackEnd
-  - [ ] Stockage des joueurs
-  - [ ] Stockage des dessins
-  - [ ] Stockage des mots demandés et trouvés
-- [ ] Code
-  - [x] Partie Dessin
-    - [x] Choix des couleurs
-    - [x] Choix de la taille du pinceau
-    - [x] Gomme
-    - [x] Remplissage
-    - [x] Clear
-  - [x] Tchat en ligne
